@@ -74,8 +74,9 @@ a{color:inherit}
 .ouvir{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--azul);background:transparent;color:var(--azul);font:700 .95rem var(--display);cursor:pointer}
 .ouvir svg{width:20px;height:20px}
 .ouvir[aria-pressed="true"]{background:var(--azul);color:var(--sobre-azul)}
-.azul .ouvir{border-color:var(--sobre-azul);color:var(--sobre-azul)}
-.azul .ouvir[aria-pressed="true"]{background:var(--sobre-azul);color:var(--azul)}
+.azul .ouvir,.abertura .ouvir{border-color:var(--sobre-azul);color:var(--sobre-azul)}
+.abertura .ouvir{justify-self:start;animation:textoSobe .6s ease-out 1.2s both}
+.azul .ouvir[aria-pressed="true"],.abertura .ouvir[aria-pressed="true"]{background:var(--sobre-azul);color:var(--azul)}
 
 /* topo */
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--papel);border-bottom:1px solid var(--linha)}
@@ -110,7 +111,7 @@ a{color:inherit}
 .abertura h1{animation:textoSobe .6s ease-out .9s both}
 .abertura .lead{animation:textoSobe .6s ease-out 1.1s both}
 .abertura .acoes{animation:textoSobe .6s ease-out 1.3s both}
-@media (prefers-reduced-motion: reduce){.logo-anim img,.abertura h1,.abertura .lead,.abertura .acoes{animation:none!important}}
+@media (prefers-reduced-motion: reduce){.logo-anim img,.abertura h1,.abertura .lead,.abertura .acoes,.abertura .ouvir{animation:none!important}}
 .abertura h1{font-size:clamp(2.2rem,6vw,4.4rem);font-weight:800;letter-spacing:-.02em;max-width:14ch}
 .abertura .lead{font-size:clamp(1.1rem,2vw,1.35rem);max-width:36rem;color:var(--sobre-azul-2)}
 .acoes{display:flex;flex-wrap:wrap;gap:12px}
@@ -224,6 +225,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
 .rodape .miolo{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;justify-content:space-between}
 .rodape img{height:72px;width:auto}
 .rodape p{font-size:.95rem}
+.rodape a{color:#fff}
 :root[data-contraste="1"] .rodape{border-top:2px solid #fff}
 
 @media (prefers-reduced-motion: reduce){.bt{transition:none}.bt:hover{transform:none}}
@@ -241,7 +243,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       <img class="escuro" src="assets/marca-branca.png" alt="BULA" width="600" height="193">
     </a>
     <nav class="menu" aria-label="Seções">
-      <a href="#problema">O problema</a><a href="#solucao">Solução</a><a href="#como">Como funciona</a><a href="#diferenciais">Diferenciais</a><a href="#modelo">Modelo</a><a href="#squad">Squad</a>
+      <a href="#problema">O problema</a><a href="#solucao">Solução</a><a href="#como">Como funciona</a><a href="#diferenciais">Diferenciais</a><a href="#modelo">Modelo</a><a href="historia.html">Nossa história</a>
     </nav>
     <div class="acess" role="group" aria-label="Acessibilidade">
       <button type="button" id="aMenos" aria-label="Diminuir a letra">A−</button>
@@ -273,6 +275,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       </div>
       <h1 id="titulo">O app de remédios que fala.</h1>
       <p class="lead">O BULA lê a caixa do remédio, explica para que serve em palavras simples, avisa a hora de tomar e mostra onde pegar de graça no Recife. Feito para quem tem baixa visão ou pouca leitura, e para a família que cuida.</p>
+      <button type="button" class="ouvir" data-ler="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Ouvir esta parte</button>
       <div class="acoes">
         <a class="bt bt-branco" href="#pitch" id="btPitch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>Assistir ao pitch</a>
         <a class="bt bt-verde figma" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18h3"/></svg>Experimentar o protótipo</a>
@@ -424,30 +427,6 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       </div>
     </div>
   </section>
-
-  <section class="secao clara faixa" id="squad" aria-labelledby="t-squad">
-    <div class="miolo">
-      <div class="cab-secao">
-        <span class="selo">Quem fez</span>
-        <h2 id="t-squad">Squad 4 · CESAR School</h2>
-      </div>
-      <ul class="time">
-        <li><img src="assets/time-adson.webp" alt="" loading="lazy" width="320" height="320">Adson de Oliveira</li>
-        <li><img src="assets/time-anderson.webp" alt="" loading="lazy" width="320" height="320">Anderson Leite</li>
-        <li><img src="assets/time-gabriela.webp" alt="" loading="lazy" width="320" height="320">Gabriela Torres</li>
-        <li><img src="assets/time-guilherme.webp" alt="" loading="lazy" width="320" height="320">Guilherme de Oliveira</li>
-        <li><img src="assets/time-isabelly.webp" alt="" loading="lazy" width="320" height="320">Isabelly Damazio</li>
-        <li><img src="assets/time-jack.webp" alt="" loading="lazy" width="320" height="320">Jack Guerra</li>
-        <li><img src="assets/time-julia.webp" alt="" loading="lazy" width="320" height="320">Julia Albuquerque</li>
-        <li><img src="assets/time-kaio.webp" alt="" loading="lazy" width="320" height="320">Kaio Santiago</li>
-        <li><img src="assets/time-laura.webp" alt="" loading="lazy" width="320" height="320">Laura Betina</li>
-        <li><img src="assets/time-rafael.webp" alt="" loading="lazy" width="320" height="320">Rafael Alves</li>
-      </ul>
-      <div class="acoes" style="margin-top:48px">
-        <a class="bt bt-verde figma" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18h3"/></svg>Experimentar o protótipo</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="rodape faixa">
@@ -457,6 +436,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       <p><b>Squad 4 · CESAR School · 2026</b></p>
       <p>Projeto ligado ao Objetivo de Desenvolvimento Sustentável 10, Redução das Desigualdades.</p>
       <p>Este site usa a fonte Atkinson Hyperlegible, criada para pessoas com baixa visão.</p>
+      <p>Instagram: <a href="https://www.instagram.com/bula.aplicativo/" target="_blank" rel="noopener">@bula.aplicativo</a> · <a href="historia.html">Nossa história</a></p>
     </div>
   </div>
 </footer>
@@ -528,8 +508,9 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       if(falando===b){ pararFala(); return; }
       pararFala();
       var sec=b.closest('section'), clone=sec.cloneNode(true);
-      clone.querySelectorAll('button,.vis,.fonte').forEach(function(x){ x.remove(); });
-      var u=new SpeechSynthesisUtterance(clone.innerText.replace(/\s+/g,' ').trim()); u.lang='pt-BR'; u.rate=.95;
+      clone.querySelectorAll('button,.vis,.fonte,.acoes,video').forEach(function(x){ x.remove(); });
+      var logo=sec.querySelector('.logo-anim'), txt=(logo?logo.getAttribute('aria-label')+'. ':'')+clone.innerText;
+      var u=new SpeechSynthesisUtterance(txt.replace(/\s+/g,' ').trim()); u.lang='pt-BR'; u.rate=.95;
       var v=speechSynthesis.getVoices().find(function(x){ return /pt.?BR/i.test(x.lang); }); if(v) u.voice=v;
       u.onend=u.onerror=function(){ if(falando===b) pararFala(); };
       falando=b; b.setAttribute('aria-pressed','true'); speechSynthesis.speak(u);
