@@ -207,6 +207,17 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
 :root[data-contraste="1"] .subir{background:#000;color:#FFE600;border-color:#FFE600}
 @media (prefers-reduced-motion: reduce){.subir{transition:none}}
 
+/* quem paga, em telas */
+.modelo-telas{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.modelo-telas li{display:flex;flex-direction:column;gap:10px}
+.modelo-telas .celular{background:#020B2B;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.modelo-telas h4{margin:4px 0 0;font-family:var(--display);font-size:1.15rem;line-height:1.25}
+.modelo-telas p{margin:0;color:var(--sobre-azul-2)}
+.tambem{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.tambem li{padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35)}
+.exemplo-nota{margin-top:14px;font-size:.88rem;color:var(--sobre-azul-2)}
+:root[data-contraste="1"] .tambem li{background:#000;border-color:#fff}
+@media (max-width:760px){.modelo-telas{grid-template-columns:1fr;max-width:300px;margin-inline:auto}}
 /* privacidade */
 .priv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:40px}
 .priv div{display:flex;flex-direction:column;gap:8px;padding-top:18px;border-top:3px solid var(--azul)}
@@ -343,7 +354,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
         <button type="button" role="tab" id="tabC" aria-controls="painelC" aria-selected="false" tabindex="-1">Para quem cuida</button>
       </div>
       <ol class="telas" id="painelU" role="tabpanel" aria-labelledby="tabU">
-        <li><div class="celular"><img src="assets/tela-u1.webp" alt="Tela inicial com quatro botões grandes: ler a caixa, meus remédios, remédio de graça e família" loading="lazy" width="472" height="961"></div><h3>Tela inicial</h3><p>Quatro botões grandes e o botão Falar sempre embaixo.</p></li>
+        <li><div class="celular"><img src="assets/tela-u1.webp" alt="Tela inicial com quatro botões grandes: ler a caixa, meus remédios, onde pegar o remédio e família" loading="lazy" width="472" height="961"></div><h3>Tela inicial</h3><p>Quatro botões grandes e o botão Falar sempre embaixo.</p></li>
         <li><div class="celular"><img src="assets/tela-u2.webp" alt="Cadastro do remédio conferindo com a receita: café da manhã, 1 comprimido" loading="lazy" width="472" height="961"></div><h3>Colocar o remédio</h3><p>Leu a caixa, responde três perguntas copiando da receita. O app não indica dose.</p></li>
         <li><div class="celular"><img src="assets/tela-u3.webp" alt="Tela de hoje mostrando o café da manhã atrasado e o botão TOMEI" loading="lazy" width="472" height="961"></div><h3>Hora do remédio</h3><p>A tela de hoje mostra o que tomar agora, com foto da caixa e o botão TOMEI.</p></li>
         <li><div class="celular"><img src="assets/tela-u4.webp" alt="Alarme às 7 horas com o nome do remédio e os botões TOMEI e daqui a 10 minutos" loading="lazy" width="472" height="961"></div><h3>Alarme</h3><p>Toca com o som do BULA e fala o nome do remédio. Dá para conferir a caixa com a câmera.</p></li>
@@ -394,23 +405,25 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
         <h2 id="t-modelo">Gratuito para quem usa. Feito para crescer.</h2>
         <p>Quem toma o remédio e quem cuida nunca pagam. Paga quem economiza quando a pessoa toma o remédio certo, na hora certa.</p>
       </div>
+      <h3 class="sub-modelo">Quem paga</h3>
+      <ol class="modelo-telas">
+        <li><div class="celular"><img src="assets/modelo-gratis.webp" alt="Aba Farmácia Popular: os remédios da pessoa que são grátis e como pegar" loading="lazy" width="472" height="1021"></div><h4>1. Grátis primeiro</h4><p>O app mostra onde pegar o remédio de graça.</p></li>
+        <li><div class="celular"><img src="assets/modelo-destaques.webp" alt="Aba Farmácias com um cupom e duas farmácias em destaque, marcadas como patrocinado" loading="lazy" width="472" height="1021"></div><h4>2. Farmácias pagam para aparecer</h4><p>Destaque marcado como patrocinado.</p></li>
+        <li><div class="celular"><img src="assets/modelo-cupom.webp" alt="Cupom de entrega grátis com o código grande para mostrar no caixa; não vale para remédios" loading="lazy" width="472" height="1021"></div><h4>3. Cupom para quem usa</h4><p>Entrega grátis, higiene, cuidado. Nunca remédio.</p></li>
+      </ol>
+      <ul class="tambem">
+        <li><b>Governo</b> leva o BULA de graça à população (CPSI)</li>
+        <li><b>Laboratórios</b> pagam pela bula em voz e letra grande</li>
+        <li><b>Clínicas e planos</b> acompanham quem autorizar</li>
+      </ul>
+      <p class="exemplo-nota">Farmácias e cupom das telas são exemplos.</p>
       <h3 class="sub-modelo">Por que escala</h3>
       <div class="escala">
         <div><span class="n-escala">Brasil</span><h4>Nacional desde o primeiro dia</h4><p>A lista oficial da Anvisa vale para todo o país: mais de 27 mil códigos de barras já vêm dentro do app.</p></div>
         <div><span class="n-escala">≈ 0</span><h4>Custo quase zero por pessoa</h4><p>Funciona sem internet e sem servidor guardando dados de saúde. Cada pessoa nova quase não aumenta o custo.</p></div>
         <div><span class="n-escala">+1</span><h4>Uma cidade de cada vez, sem recomeçar</h4><p>Só farmácias e postos são locais. Vêm do mapa aberto, da lista nacional da Farmácia Popular e dos dados abertos de cada prefeitura.</p></div>
       </div>
-      <h3 class="sub-modelo">Quem paga</h3>
-      <div class="pagantes">
-        <article class="fase modelo-g"><span class="etapa">B2G2C · Governo</span><h4>Secretarias de Saúde e de Inovação</h4><p>Parceria pelo Contrato Público para Solução Inovadora (CPSI), depois por assinatura.</p><p class="destaque-m"><b>Acesso gratuito</b> à população atendida pela rede pública de saúde.</p></article>
-        <article class="fase modelo-b"><span class="etapa">B2B · Empresas parceiras</span><h4>Farmácias, laboratórios, clínicas e planos</h4>
-          <ul class="lista-m">
-            <li><b>Farmácias:</b> destaque no mapa "Comprar perto", marcado como patrocinado e sempre depois das opções de graça.</li>
-            <li><b>Laboratórios:</b> bula em voz e letra grande, que eles já devem oferecer a quem tem deficiência visual.</li>
-            <li><b>Clínicas e planos de saúde:</b> painel para acompanhar quem autorizar, por assinatura.</li>
-          </ul><p class="destaque-m"><b>Nova fonte de receita</b> por parcerias comerciais.</p></article>
-      </div>
-      <p class="neutro">Sem propaganda de remédio: o destaque é da farmácia, nunca do medicamento, e nunca aparece na bula. O que a pessoa toma não é usado para escolher anúncio.</p>
+      <p class="neutro">Nunca anunciamos remédio. O que a pessoa toma não é usado para escolher anúncio.</p>
     </div>
   </section>
 
