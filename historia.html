@@ -231,8 +231,11 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
 
 /* ===== Nossa história ===== */
 .menu a[aria-current="page"]{color:var(--azul);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:3px}
-.capa-h{background:var(--azul);color:var(--sobre-azul)}
-.capa-h .miolo{display:grid;gap:22px;padding-block:clamp(56px,9vw,104px)}
+.capa-h{position:relative;overflow:hidden;background:var(--azul-forte);color:var(--sobre-azul)}
+.capa-h video.fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+.capa-h::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(2,40,170,.94) 0%,rgba(3,72,255,.86) 48%,rgba(3,72,255,.78) 100%)}
+:root[data-contraste="1"] .capa-h::after{background:rgba(0,0,0,.9)}
+.capa-h .miolo{position:relative;z-index:1;display:grid;gap:22px;padding-block:clamp(56px,9vw,104px) clamp(88px,10vw,112px)}
 .capa-h .miolo > *{justify-self:start}
 .capa-h .selo{background:var(--sobre-azul);color:var(--azul)}
 .capa-h h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;letter-spacing:-.02em;max-width:16ch}
@@ -304,6 +307,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
 
 <main id="conteudo">
   <section class="capa-h faixa" id="inicio" aria-labelledby="titulo">
+    <video class="fundo" id="vFundo" src="assets/fundo.mp4" poster="assets/fundo-capa.jpg" autoplay muted loop playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="miolo">
       <span class="selo">Nossa história</span>
       <h1 id="titulo">Do primeiro encontro ao BULA</h1>
@@ -314,6 +318,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       </div>
       <button type="button" class="ouvir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Ouvir esta parte</button>
     </div>
+    <button type="button" class="pausar" id="bPausar" aria-pressed="false">Pausar o vídeo de fundo</button>
   </section>
 
   <section class="secao clara faixa" id="linha" aria-labelledby="t-linha">
@@ -516,6 +521,12 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   contraste(ler('bula-contraste')==='1');
   bC.onclick=function(){ contraste(!raiz.hasAttribute('data-contraste')); };
 
+  /* vídeo de fundo: para sozinho com "reduzir movimento"; botão para pausar */
+  var vF=document.getElementById('vFundo'), bP=document.getElementById('bPausar');
+  function pausar(p){ if(p){ vF.pause(); bP.textContent='Tocar o vídeo de fundo'; } else { var r=vF.play(); if(r&&r.catch) r.catch(function(){}); bP.textContent='Pausar o vídeo de fundo'; } bP.setAttribute('aria-pressed',p?'true':'false'); }
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) pausar(true);
+  bP.onclick=function(){ pausar(!vF.paused); };
+
   /* ouvir: lê a seção com a voz do aparelho (sem botões, legendas e textos escondidos) */
   var falando=null;
   function pararFala(){ if('speechSynthesis' in window) speechSynthesis.cancel(); if(falando){ falando.setAttribute('aria-pressed','false'); falando=null; } }
@@ -526,7 +537,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
       if(falando===b){ pararFala(); return; }
       pararFala();
       var clone=b.closest('section').cloneNode(true);
-      clone.querySelectorAll('button,.vis,.acoes,figure').forEach(function(x){ x.remove(); });
+      clone.querySelectorAll('button,.vis,.acoes,figure,video').forEach(function(x){ x.remove(); });
       clone.querySelectorAll('li,h1,h2,h3,p,span,b').forEach(function(x){ x.append('. '); });
       var txt=clone.textContent.replace(/\s+/g,' ').replace(/(\.\s*){2,}/g,'. ').replace(/\[|\]/g,'').trim();
       var u=new SpeechSynthesisUtterance(txt); u.lang='pt-BR'; u.rate=.95;
