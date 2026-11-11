@@ -6,6 +6,18 @@
 <title>BULA · Squad 4</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="BULA, Base Unificada de Linguagem Acessível: o app de remédios que fala. Projeto do Squad 4 da CESAR School.">
+<meta name="theme-color" content="#0348FF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BULA">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BULA · O app de remédios que fala">
+<meta property="og:description" content="Lê a caixa do remédio, explica em palavras simples, avisa a hora de tomar e mostra onde pegar de graça. Projeto do Squad 4 da CESAR School.">
+<meta property="og:url" content="https://bula-app.github.io/bula/">
+<meta property="og:image" content="https://bula-app.github.io/bula/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BULA, Base Unificada de Linguagem Acessível: o app de remédios que fala">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,6 +90,9 @@ a{color:inherit}
 .abertura .ouvir{justify-self:start;animation:textoSobe .6s ease-out 1.2s both}
 .azul .ouvir[aria-pressed="true"],.abertura .ouvir[aria-pressed="true"]{background:var(--sobre-azul);color:var(--azul)}
 
+/* faixa do Demoday: aparece só até 13/11/2026 e some sozinha depois */
+.voto{margin:0;padding:10px 16px;background:var(--marinho);color:#fff;text-align:center;font-family:var(--display);font-weight:700;font-size:.98rem;line-height:1.35}
+:root[data-contraste="1"] .voto{background:#000;color:#FFE600;border-bottom:2px solid #FFE600}
 /* topo */
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--papel);border-bottom:1px solid var(--linha)}
 .topo .miolo{display:flex;align-items:center;gap:16px;min-height:72px;flex-wrap:wrap;padding-block:8px}
@@ -266,6 +281,8 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   </div>
 </header>
 
+<p class="voto" id="voto" hidden></p>
+
 <main id="conteudo">
   <section class="abertura faixa" id="inicio" aria-labelledby="titulo">
     <video class="fundo" id="vFundo" src="assets/fundo.mp4" poster="assets/fundo-capa.jpg" autoplay muted loop playsinline aria-hidden="true" tabindex="-1"></video>
@@ -360,9 +377,9 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
         <li><div class="celular"><img src="assets/tela-u4.webp" alt="Alarme às 7 horas com o nome do remédio e os botões TOMEI e daqui a 10 minutos" loading="lazy" width="472" height="961"></div><h3>Alarme</h3><p>Toca com o som do BULA e fala o nome do remédio. Dá para conferir a caixa com a câmera.</p></li>
       </ol>
       <ol class="telas" id="painelC" role="tabpanel" aria-labelledby="tabC" hidden>
-        <li><div class="celular"><img src="assets/tela-c1.webp" alt="Remédios de André no celular da cuidadora, com quantos comprimidos restam" loading="lazy" width="538" height="896"></div><h3>Remédios de quem você cuida</h3><p>Coloca ou muda remédios à distância e vê quando a caixa vai acabar.</p></li>
-        <li><div class="celular"><img src="assets/tela-c2.webp" alt="Semana de André, com as doses marcadas e as que faltaram" loading="lazy" width="538" height="896"></div><h3>A semana</h3><p>Cada dia mostra as doses marcadas e as que faltaram.</p></li>
-        <li><div class="celular"><img src="assets/tela-c3.webp" alt="Aviso de dose não marcada, com os botões ligar para André e lembrar no celular" loading="lazy" width="538" height="896"></div><h3>Dose atrasada</h3><p>Se passar do horário, aparece o aviso com ligar ou lembrar no celular da pessoa.</p></li>
+        <li><div class="celular"><img src="assets/tela-c1.webp" alt="Remédios de André no celular da cuidadora, com os horários de cada um" loading="lazy" width="472" height="961"></div><h3>Remédios de quem você cuida</h3><p>Coloca ou muda remédios à distância, sem precisar estar junto.</p></li>
+        <li><div class="celular"><img src="assets/tela-c2.webp" alt="Calendário do mês de André, com os dias em que tomou tudo, uma parte ou não marcou" loading="lazy" width="472" height="961"></div><h3>O mês inteiro</h3><p>Cada dia mostra se tomou tudo, uma parte ou nada.</p></li>
+        <li><div class="celular"><img src="assets/tela-c3.webp" alt="Aviso de dose não marcada, com os botões ligar para André e lembrar no celular" loading="lazy" width="472" height="961"></div><h3>Dose atrasada</h3><p>Se passar do horário, aparece o aviso com ligar ou lembrar no celular da pessoa.</p></li>
         <li><div class="celular"><img src="assets/tela-c4.webp" alt="Resumo da semana enviado no WhatsApp para a rede de apoio" loading="lazy" width="414" height="896"></div><h3>Resumo para a família</h3><p>O resumo da semana vai pelo WhatsApp para quem também ajuda.</p></li>
       </ol>
     </div>
@@ -462,6 +479,12 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   /* link do protótipo no Figma: troque aqui quando mudar */
   var FIGMA='https://bulaa.figma.site';
   document.querySelectorAll('a.figma').forEach(function(a){ a.href=FIGMA; });
+
+  /* faixa do voto popular no Demoday (13/11/2026): some sozinha no dia seguinte */
+  (function(){ var v=document.getElementById('voto'), h=new Date(), dia=h.getFullYear()*10000+(h.getMonth()+1)*100+h.getDate();
+    if(!v || dia>20261113) return;
+    v.textContent = dia===20261113 ? 'Hoje no Demoday do Porto Digital: vote no BULA, Squad 4.' : 'Dia 13/11 no Demoday do Porto Digital: vote no BULA, Squad 4.';
+    v.hidden=false; })();
 
   /* voltar ao início: aparece depois de descer a página */
   var bS=document.getElementById('bSubir');
