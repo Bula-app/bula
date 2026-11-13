@@ -91,8 +91,11 @@ a{color:inherit}
 .azul .ouvir[aria-pressed="true"],.abertura .ouvir[aria-pressed="true"]{background:var(--sobre-azul);color:var(--azul)}
 
 /* faixa do Demoday: aparece só até 13/11/2026 e some sozinha depois */
-.voto{margin:0;padding:10px 16px;background:var(--marinho);color:#fff;text-align:center;font-family:var(--display);font-weight:700;font-size:.98rem;line-height:1.35}
+.voto{margin:0;padding:10px 16px;background:var(--marinho);color:#fff;font-family:var(--display);font-weight:700;font-size:.98rem;line-height:1.35;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;text-align:center}
+.voto a{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#FFD54A;color:#061C60;text-decoration:none;font-weight:800}
+.voto a:hover{background:#FFE27A}
 :root[data-contraste="1"] .voto{background:#000;color:#FFE600;border-bottom:2px solid #FFE600}
+:root[data-contraste="1"] .voto a{background:#FFE600;color:#000}
 /* topo */
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--papel);border-bottom:1px solid var(--linha)}
 .topo .miolo{display:flex;align-items:center;gap:16px;min-height:72px;flex-wrap:wrap;padding-block:8px}
@@ -281,7 +284,7 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   </div>
 </header>
 
-<p class="voto" id="voto" hidden></p>
+<div class="voto" id="voto" role="region" aria-label="Votação do Demoday" hidden></div>
 
 <main id="conteudo">
   <section class="abertura faixa" id="inicio" aria-labelledby="titulo">
@@ -483,7 +486,9 @@ tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
   /* faixa do voto popular no Demoday (13/11/2026): some sozinha no dia seguinte */
   (function(){ var v=document.getElementById('voto'), h=new Date(), dia=h.getFullYear()*10000+(h.getMonth()+1)*100+h.getDate();
     if(!v || dia>20261113) return;
-    v.textContent = dia===20261113 ? 'Hoje no Demoday do Porto Digital: vote no BULA, Squad 4.' : 'Dia 13/11 no Demoday do Porto Digital: vote no BULA, Squad 4.';
+    var t=document.createElement('span'); t.textContent = dia===20261113 ? 'Hoje é o Demoday do Porto Digital. Vote no BULA, Squad 4.' : 'Dia 13/11 é o Demoday do Porto Digital. Vote no BULA, Squad 4.';
+    v.appendChild(t);
+    if(dia===20261113){ var a=document.createElement('a'); a.href='https://docs.google.com/forms/d/1efX12ffe9BxBFlIvGytHHOTaGBgvjlUTo_QaCPg6hKc/viewform'; a.target='_blank'; a.rel='noopener'; a.textContent='Votar no BULA'; v.appendChild(a); }
     v.hidden=false; })();
 
   /* voltar ao início: aparece depois de descer a página */
